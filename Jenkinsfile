@@ -12,7 +12,8 @@ pipeline {
         AWS_ACCOUNT_ID = "826334059644"
         vault = credentials('vaultToken')
         tfvars = "vars/${params.Options}.tfvars"
-        eks_cluster_name = "roboshop-eks-cluster-int"
+        eks_cluster_name = "dkode-eks-cluster-demo"
+        service = "catalog_demo"
     }
 
     stages {
@@ -25,14 +26,10 @@ pipeline {
         }
 
         stage ('Build Docker Images') {
-            stage ("Build catalog Docker Image") {
-                    steps {
-                        dir("Docker/catalog") {
-                            sh "docker build -t roboshop-catalog-int ."
-                            sh "docker tag roboshop-catalog-int:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/roboshop-catalog-int:latest"
-                            sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/roboshop-catalog-int:latest"
-                    }
-                }
+            steps {
+                sh "docker build -t ${service} ."
+                sh "docker tag ${service}:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${service}:latest"
+                sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${service}:latest"
             }
         }
     }

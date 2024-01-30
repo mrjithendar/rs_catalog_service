@@ -39,7 +39,7 @@ spec:
               topologyKey: "kubernetes.io/hostname"
       containers:
         - name: catalogue
-          image: 826334059644.dkr.ecr.us-east-1.amazonaws.com/roboshop-catalogue-int:latest
+          image: 826334059644.dkr.ecr.us-east-1.amazonaws.com/roboshop-catalogue-demo:latest
           ports:
             - containerPort: 8080
           resources:
