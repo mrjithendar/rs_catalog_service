@@ -51,7 +51,7 @@ spec:
               memory: 50Mi
           env:
             - name: MONGO_URL
-              value: "mongodb://mongodb:27017/catalog"
+              value: "mongodb://mongodb:27017/catalogue"
 
 
 
