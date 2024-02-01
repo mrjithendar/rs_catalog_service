@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: catalog
+  name: catalogue
   namespace: roboshop
   labels:
-    app: catalog
+    app: catalogue
     purpose: roboshop
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: catalog
+      app: catalogue
   minReadySeconds: 5
   strategy:
     type: RollingUpdate
@@ -20,7 +20,7 @@ spec:
   template:
     metadata:
       labels:
-        app: catalog
+        app: catalogue
     spec:
       tolerations:
         - key: "purpose"
@@ -35,11 +35,11 @@ spec:
                   - key: app
                     operator: In
                     values:
-                      - catalog
+                      - catalogue
               topologyKey: "kubernetes.io/hostname"
       containers:
-        - name: catalog
-          image: 826334059644.dkr.ecr.us-east-1.amazonaws.com/catalog_demo:latest
+        - name: catalogue
+          image: 826334059644.dkr.ecr.us-east-1.amazonaws.com/catalogue_demo:latest
           ports:
             - containerPort: 8080
           resources:
